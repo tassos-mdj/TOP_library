@@ -23,9 +23,9 @@ function addBookToLibrary(title, author ,pages, read) {
 }
 
 function displayBook(currentBook) {
-    const booksDisplay = document.getElementById("books-display");
-    const book = document.createElement("div");
-    const currentTitle = document.createElement("h3");
+    const booksDisplay = document.getElementById("books-display"); 
+    const book = document.createElement("div");             // create the book container
+    const currentTitle = document.createElement("h3");      // add book details fields
     currentTitle.innerText = currentBook.title;
     book.appendChild(currentTitle);
     const currentAuthor = document.createElement("p");
@@ -34,19 +34,54 @@ function displayBook(currentBook) {
     const currentPages = document.createElement("p");
     currentPages.innerText = "# of pages: " + currentBook.pages;
     book.appendChild(currentPages);
-    
     const currentRead = document.createElement("input") ;
     currentRead.setAttribute("type", "checkbox");
     currentRead.setAttribute("id", "readstatus");
     currentRead.checked = currentBook.read;
     book.appendChild(currentRead);
-
     const labelForRead = document.createElement("label");
     labelForRead.htmlFor = "readstatus";
     labelForRead.innerText = "Read status: ";
     book.appendChild(labelForRead);
-    
-    booksDisplay.appendChild(book);
+    const changeStatusButton = document.createElement("button");
+    changeStatusButton.setAttribute("id", "change-status");
+    changeStatusButton.textContent = "Change status";
+    book.appendChild(changeStatusButton);
+    booksDisplay.appendChild(book); // attach to the DOM
+    changeStatusButton.addEventListener("click", () => {
+        if (currentRead.checked === true) {currentRead.checked = false;} 
+        else {currentRead.checked = true;}
+    });
 }
 
+
+
+
+
 myLibrary.forEach((book) => displayBook(book));
+
+const dialog = document.querySelector("dialog");
+const addButton = document.querySelector("#addBookButton");
+addButton.addEventListener("click", () => {
+    dialog.showModal();
+});
+
+function resetDialog() {
+    document.getElementById("book-title").value = '';
+    document.getElementById("book-author").value = '';
+    document.getElementById("book-pages").value = '';
+    document.getElementById("book-read").checked = false;
+}
+
+const submitBook = document.querySelector("#submit-book");
+submitBook.addEventListener("click", function() {
+    event.preventDefault();
+    addBookToLibrary(document.getElementById("book-title").value, document.getElementById('book-author').value, document.getElementById('book-pages').value, document.getElementById('book-read').checked);
+    const len = myLibrary.length;
+    displayBook(myLibrary[len-1]);
+    resetDialog();
+    dialog.close();
+});
+
+
+
