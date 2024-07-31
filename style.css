@@ -172,8 +172,41 @@ article {
     grid-area: article;
     border: 1px solid #333333;
     border-right: none;
-    padding: 0 2em;
+    padding: 0 2em 2em 2em;
 }
+
+.books-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2em;
+}
+
+.books-display > div {
+    border: none;
+    border-radius: 30px;
+    padding: 0 2em 2em 2em;
+    background-color: bisque;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.books-display input[type=checkbox] {
+    display: none;
+}
+
+.books-display input[type=checkbox]:checked + label::after {
+    content: "Read";
+    color: green;
+    font-weight: bold; 
+    z-index: 100;
+}
+
+.books-display input[type=checkbox] + label::after {
+  content: "Not read";
+  color: red;
+  font-weight: bold; 
+  z-index: 100;
+}
+
 
 footer {
     grid-area: footer;
