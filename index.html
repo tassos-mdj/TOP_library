@@ -10,8 +10,10 @@
     <div class="container">
         <header class="header">
             <img src="logo.jpeg" alt="Logo" id="top-logo">
-            <h1>Microdj Library</h1>
-            <p>The 24/7 library for students and researchers</p>
+            <div class="logo-text">
+                <h1>Microdj Library</h1>
+                <p>The 24/7 library for students and researchers</p>
+            </div>
         </header>
         <aside class="aside">
             <nav>
@@ -19,21 +21,21 @@
                     <li>
                         <a href="#"><img src="./images/plus-thick.svg" alt="add book" id="addBookButton"></a>
                         <span>Add a book</span>
-                        <dialog>
+                        <dialog id="add-book-dialog">
                             <form action="#">
                                 <h2>Enter book details</h2>
                                     <ul>
                                         <li>
                                             <label for="book-title">Title:</label>
-                                            <input type="text" id="book-title" name="book-title">
+                                            <input type="text" id="book-title" name="book-title" class="book-title" required>
                                         </li>
                                         <li>
                                             <label for="book-author">Author:</label>
-                                            <input type="text" id="book-author" name="book-author">
+                                            <input type="text" id="book-author" name="book-author" class="book-author" required>
                                         </li>
                                         <li>
                                             <label for="book-pages">Book pages:</label>
-                                            <input type="text" id="book-pages" name="book-pages">
+                                            <input type="number" id="book-pages" name="book-pages" required>
                                         </li>
                                         <li>
                                             <label for="book-read">Is it read?</label>
@@ -48,8 +50,30 @@
                         </dialog>
                     </li>
                     <li>
-                        <a href=""><img src="./images/frequently-asked-questions.svg" alt="request icon"></a>
+                        <a href="#"><img src="./images/frequently-asked-questions.svg" alt="request icon" id="requestBookButton"></a>
                         <span>Request a book</span>
+                        <dialog id="request-book-dialog">
+                            <form action="#">
+                                <h2>Enter book details</h2>
+                                    <ul>
+                                        <li>
+                                            <label for="r-book-title">Title:</label>
+                                            <input type="text" id="r-book-title" name="r-book-title" class="book-title">
+                                        </li>
+                                        <li>
+                                            <label for="r-book-author">Author:</label>
+                                            <input type="text" id="r-book-author" name="r-book-author" class="book-author">
+                                        </li>
+                                        <li>
+                                            <input type="submit" value="Request Book" id="request-book">
+                                        </li>
+                                    </ul>
+                            </form>
+                        </dialog>
+                        <dialog id="request-complete">
+                            <h2>Your request has been submited</h2>
+                            <p>Thank you</p>
+                        </dialog>
                     </li>
                 </ul>
                 <a href="#"><button class="donate-button">Donate</button></a>

@@ -10,6 +10,8 @@ let myLibrary = [{
     read: false
 }];
 
+let requests = [];
+
 function Book(inTitle, inAuthor, inPages, inRead) {
     this.title = inTitle;
     this.author = inAuthor;
@@ -17,9 +19,21 @@ function Book(inTitle, inAuthor, inPages, inRead) {
     this.read = inRead;
 }
 
+function BookRequest(title, author){
+    this.title = title;
+    this.author = author;
+}
+Object.setPrototypeOf(BookRequest.prototype, Book.prototype);
+
 function addBookToLibrary(title, author ,pages, read) {
     const incomingBook = new Book(title, author, pages, read);
     myLibrary.push(incomingBook);
+}
+
+function addNewRequest(title, author){
+    const incomingRequest = new BookRequest(title,author);
+    requests.push(incomingRequest);
+    console.log(requests);
 }
 
 function displayBook(currentBook) {
@@ -54,34 +68,50 @@ function displayBook(currentBook) {
     });
 }
 
-
-
-
-
 myLibrary.forEach((book) => displayBook(book));
 
-const dialog = document.querySelector("dialog");
+const addDialog = document.querySelector("#add-book-dialog");
 const addButton = document.querySelector("#addBookButton");
 addButton.addEventListener("click", () => {
-    dialog.showModal();
+    addDialog.showModal();
 });
 
 function resetDialog() {
-    document.getElementById("book-title").value = '';
-    document.getElementById("book-author").value = '';
+    document.querySelector(".book-title").value = '';
+    document.querySelector(".book-author").value = '';
     document.getElementById("book-pages").value = '';
     document.getElementById("book-read").checked = false;
 }
 
 const submitBook = document.querySelector("#submit-book");
 submitBook.addEventListener("click", function() {
+    if (document.getElementById("book-title").value && document.getElementById('book-author').value && document.getElementById('book-pages').value)
+        {
     event.preventDefault();
     addBookToLibrary(document.getElementById("book-title").value, document.getElementById('book-author').value, document.getElementById('book-pages').value, document.getElementById('book-read').checked);
     const len = myLibrary.length;
     displayBook(myLibrary[len-1]);
     resetDialog();
-    dialog.close();
+    addDialog.close();
+}
 });
 
+const requestDialog = document.querySelector("#request-book-dialog");
+const requestButton = document.querySelector("#requestBookButton");
+requestButton.addEventListener("click", () => {
+    requestDialog.showModal();
+});
+
+const requestBook = document.querySelector("#request-book");
+requestBook.addEventListener("click", function() {
+    event.preventDefault();
+    addNewRequest(document.getElementById("r-book-title").value, document.getElementById('r-book-author').value);
+    resetDialog();
+   requestDialog.close();
+   completeDialog.showModal();
+   setTimeout(function() {
+    completeDialog.close()}, 3000);
+   });
 
 
+const completeDialog = document.querySelector("#request-complete");

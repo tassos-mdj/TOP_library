@@ -93,10 +93,11 @@ body {
 .container {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr min-content 1fr;
+    grid-template-rows: 8rem 1fr 8rem;
     grid-template-areas: "header header"
                         "aside article"
                         "footer footer";
+    min-height: 100vh;
 }
 
 img {
@@ -112,21 +113,27 @@ ul, li {
 header {
     grid-area: header;
     text-align: center;
-    background: rgb(218,233,236);
-    background: linear-gradient(90deg, rgba(218,233,236,1) 25%, rgba(151,193,201,1) 50%, rgba(218,233,236,1) 75%);
-    
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: left;
+    gap: 1em;
+    padding: 0 2em;
+    border-bottom: 1px solid gray;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(180,181,181,0.9136029411764706) 100%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 15px;
 }
 
 #top-logo {
-    position: absolute;
-    top: 2em;
-    left: 2em;
+    flex-grow: 0;
 }
+
 
 aside {
     grid-area: aside;
-    background-color: #DAE9EC;
-    padding-left: 2rem;
+    padding: 4cqmax 2rem;
+
 }
 
 aside img {
@@ -156,6 +163,23 @@ li a {
     background-size: 2em;
 }
 
+dialog {
+  
+  /* To see the outline of the form */
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+}
+
+label {
+  /* To make sure that all labels have the same size and are properly aligned */
+  display: inline-block;
+  min-width: 90px;
+  text-align: right;
+}
+
+
+
 .donate-button {
     margin-left: 1rem;
     padding: 0.5em 2em;
@@ -170,8 +194,6 @@ li a {
 
 article {
     grid-area: article;
-    border: 1px solid #333333;
-    border-right: none;
     padding: 0 2em 2em 2em;
 }
 
@@ -201,10 +223,20 @@ article {
 }
 
 .books-display input[type=checkbox] + label::after {
-  content: "Not read";
-  color: red;
-  font-weight: bold; 
-  z-index: 100;
+    content: "Not read";
+    color: red;
+    font-weight: bold; 
+    z-index: 100;
+}
+
+.books-display button {
+    display: block;
+    margin: 1em 0;
+    padding: 0.3em 2em;
+    border-radius: 30px;
+    border: none;
+    background-color: lightgray;
+    cursor: pointer;
 }
 
 
@@ -213,10 +245,14 @@ footer {
     text-align: center;
     padding: 1em;
     align-self: center;
-    background: rgb(218,233,236);
-    background: linear-gradient(90deg, rgba(218,233,236,1) 25%, rgba(151,193,201,1) 50%, rgba(218,233,236,1) 75%);
+    
+}
+
+footer img {
+    max-width: 4em;
 }
 
 footer p {
     margin-bottom: 0;
+    margin-top: 0.5em;
 }
