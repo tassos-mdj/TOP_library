@@ -12,18 +12,21 @@ let myLibrary = [{
 
 let requests = [];
 
-function Book(inTitle, inAuthor, inPages, inRead) {
+class Book {
+    constructor(inTitle, inAuthor, inPages, inRead) {
     this.title = inTitle;
     this.author = inAuthor;
     this.pages = inPages;
     this.read = inRead;
+    }
 }
 
-function BookRequest(title, author){
-    this.title = title;
-    this.author = author;
-}
-Object.setPrototypeOf(BookRequest.prototype, Book.prototype);
+class BookRequest extends Book { 
+    constructor(title, author){
+    super();
+    return {title: title, author: author};
+    }
+} 
 
 function addBookToLibrary(title, author ,pages, read) {
     const incomingBook = new Book(title, author, pages, read);
@@ -81,6 +84,8 @@ function resetDialog() {
     document.querySelector(".book-author").value = '';
     document.getElementById("book-pages").value = '';
     document.getElementById("book-read").checked = false;
+    document.getElementById("r-book-title").value = '';
+    document.getElementById("r-book-author").value = '';
 }
 
 const submitBook = document.querySelector("#submit-book");
